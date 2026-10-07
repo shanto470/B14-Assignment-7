@@ -1,69 +1,81 @@
+'use client'
+
+import MainPage from "@/components/Main";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const [date, setDate] = useState(null)
+
+  useEffect(() => {
+
+    const today = new Date().toLocaleDateString("bn-BD", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    })
+
+    setTimeout(() => {
+      setDate(today)
+    }, 0)
+
+  }, [])
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+    <section className="bg-[#eff4f0] pb-12">
+      <div >
+
+        <section className="container m-auto flex items-center font-sans mt-7">
+
+          <div className="w-full bg-white/60 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm flex gap-10 flex-col md:flex-row items-center justify-between ">
+            <div className="w-full -mt-12">
+
+              <div className="inline-block bg-[#e2f0e6] text-[#1b7a43] text-sm font-medium px-4 py-1.5 rounded-full">
+                {date}
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] tracking-tight leading-tight mt-3">
+                আজকের বাজারের দাম এক নজরে
+              </h1>
+
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-3">
+                চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-
+                <br />
+                সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।
+              </p>
+
+              <div className="pt-2">
+                <button className="bg-[#008744] hover:bg-[#007239] text-white font-medium px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-sm sm:text-base">
+                  সব পণ্য দেখুন
+                </button>
+              </div>
+
+            </div>
+
+
+            <div className="-mt-12 relative flex items-center justify-center w-full max-w-70 sm:max-w-[320px] aspect-square shrink-0">
+
+              <Image
+                src="/bazar-hero.png"
+                alt="banner"
+                width={500}
+                height={500}
+              />
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+      <div>
+        <MainPage></MainPage>
+      </div>
+
+    </section>
   );
 }
