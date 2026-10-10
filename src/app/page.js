@@ -1,27 +1,13 @@
 'use client'
 
+import DateDisplay from "@/components/DisplayDate";
 import MainPage from "@/components/Main";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
+// import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  const [date, setDate] = useState(null)
-
-  useEffect(() => {
-
-    const today = new Date().toLocaleDateString("bn-BD", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    })
-
-    setTimeout(() => {
-      setDate(today)
-    }, 0)
-
-  }, [])
 
   return (
 
@@ -34,7 +20,9 @@ export default function Home() {
             <div className="w-full -mt-12">
 
               <div className="inline-block bg-[#e2f0e6] text-[#1b7a43] text-sm font-medium px-4 py-1.5 rounded-full">
-                {date}
+                <Suspense fallback={null}>
+                  <DateDisplay></DateDisplay>
+                </Suspense>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] tracking-tight leading-tight mt-3">

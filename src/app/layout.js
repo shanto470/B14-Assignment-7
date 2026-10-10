@@ -2,6 +2,8 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Marquee from "@/components/Marquee";
+import MarquePage from "@/components/Marquee";
 
 
 export const metadata = {
@@ -18,6 +20,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <Navbar></Navbar>
+        <MarquePage></MarquePage>
 
         {children}
         <Footer></Footer>

@@ -1,11 +1,13 @@
 "use client"
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const NavLink = () => {
 
     const [categories, setCategories] = useState([]);
+    const pathName = usePathname()
 
     useEffect(() => {
 
@@ -22,15 +24,23 @@ const NavLink = () => {
         getCategories();
 
     }, []);
+    // console.log(categories, 'from navlink');
+
+
 
     return (
         <div className="container m-auto">
-            <div className="mt-3 flex gap-6">
+            <div className="my-4 flex gap-6">
 
                 {categories.map((item) => (
                     <Link
+
                         key={item.id}
                         href={`/category/${item.slug}`}
+                        className={`rounded-lg px-4 py-2 transition ${pathName === `/category/${item.slug}`
+                                ? "bg-[#05893E] text-white"
+                                : "text-gray-700 hover:bg-gray-100"
+                            }`}
                     >
                         {item.icon} {item.nameBn}
                     </Link>

@@ -1,9 +1,10 @@
 import { Play } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 const AllProducts = ({ product }) => {
     return (
-        <div className="">
+        <Link href={`/productDetails/${product.id}`}>
 
             <div key={product.id} className="bg-white p-5 border border-gray-200 rounded-2xl flex justify-between items-end">
                 <div>
@@ -26,7 +27,7 @@ const AllProducts = ({ product }) => {
                 </div>
             </div>
 
-        </div >
+        </Link  >
     );
 };
 

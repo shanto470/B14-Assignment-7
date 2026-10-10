@@ -1,4 +1,5 @@
 import { Play } from "lucide-react";
+import Link from "next/link";
 // import Image from "next/image";
 import React from "react";
 
@@ -10,12 +11,12 @@ const DownProduct = ({ products }) => {
         .sort((a, b) => Math.abs(b.change.pct) - Math.abs(a.change.pct))
         .slice(0, 6);
 
-    console.log(upProducts, "from dam barse page");
+    // console.log(upProducts, "from dam barse page");
 
     return (
         <div className="grid grid-cols-3 gap-5 ">
             {upProducts.map((product) => (
-                <div key={product.id} className="bg-white p-5 border border-gray-200 rounded-2xl flex justify-between items-end">
+                <Link href={`/productDetails/${product.id}`} key={product.id} className="bg-white p-5 border border-gray-200 rounded-2xl flex justify-between items-end">
                     <div>
                         <div className="flex gap-2">
                             <div className="bg-[#eff4f0] p-2 rounded-xl text-center">
@@ -32,7 +33,7 @@ const DownProduct = ({ products }) => {
                     <div className=" bg-[#eff4f0] text-green-500 px-4 py-1 rounded-2xl flex items-center gap-2">
                         <Play className="rotate-90 fill-current w-3 h-3" />{Math.abs(product.change.pct).toLocaleString("bn-BD")} %
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     );
