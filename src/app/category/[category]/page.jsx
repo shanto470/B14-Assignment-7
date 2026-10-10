@@ -4,7 +4,8 @@ const page = async ({ params }) => {
     const { category } = await params;
 
     const res = await fetch(
-        `https://api.api-store.workers.dev/api/bazardor/products?category=${category}`
+        // `https://api.api-store.workers.dev/api/bazardor/products?category=${category}`
+        `https://openapi.programming-hero.com/api/bazardor/products?category=${category}`
     );
 
     const products = await res.json();

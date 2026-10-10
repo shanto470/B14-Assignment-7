@@ -14,7 +14,8 @@ const NavLink = () => {
         const getCategories = async () => {
 
             const res = await fetch(
-                "https://api.api-store.workers.dev/api/bazardor/categories"
+                // "https://api.api-store.workers.dev/api/bazardor/categories"
+                "https://openapi.programming-hero.com/api/bazardor/categories"
             );
 
             const data = await res.json();
@@ -38,8 +39,8 @@ const NavLink = () => {
                         key={item.id}
                         href={`/category/${item.slug}`}
                         className={`rounded-lg px-4 py-2 transition ${pathName === `/category/${item.slug}`
-                                ? "bg-[#05893E] text-white"
-                                : "text-gray-700 hover:bg-gray-100"
+                            ? "bg-[#05893E] text-white"
+                            : "text-gray-700 hover:bg-gray-100"
                             }`}
                     >
                         {item.icon} {item.nameBn}

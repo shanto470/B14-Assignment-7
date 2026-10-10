@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MarquePage from "@/components/Marquee";
+import { Toaster } from "react-hot-toast";
 
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
 
         {children}
         <Footer></Footer>
+        <Toaster />
       </body>
     </html>
   );

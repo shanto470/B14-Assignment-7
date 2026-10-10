@@ -5,11 +5,13 @@ import Link from "next/link";
 // import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { SiGoogle, SiGithub } from "@icons-pack/react-simple-icons";
-import { authClient } from "@/lib/auth-client";
+// import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+
 
 export default function SignupPage() {
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,14 +25,26 @@ export default function SignupPage() {
         })
         if (data) {
             console.log(data);
+            toast.success("Sign Up Successful")
             redirect("/")
+
         }
         if (error) {
             console.log(error);
+            toast.error(error.message)
+            return
         }
 
-
-
+    };
+    const handleGoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    };
+    const handleGithubSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "github",
+        });
     };
 
     return (
@@ -160,11 +174,10 @@ export default function SignupPage() {
 
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         <button
+
                             type="button"
                             className="btn h-[53px] min-h-[53px] rounded-xl border border-[#dce5dc] bg-transparent text-sm font-semibold text-[#263128] shadow-none transition hover:border-[#aab9ac] hover:bg-[#f1f5f1] sm:text-base"
-                            onClick={() =>
-                                alert("Google authentication এখনো যুক্ত করা হয়নি।")
-                            }
+                            onClick={handleGoogleSignIn}
                         >
                             <SiGoogle size={20} color="#4285F4" />
                             Google দিয়ে চালিয়ে যান
@@ -173,9 +186,7 @@ export default function SignupPage() {
                         <button
                             type="button"
                             className="btn h-[53px] min-h-[53px] rounded-xl border border-[#dce5dc] bg-transparent text-sm font-semibold text-[#263128] shadow-none transition hover:border-[#aab9ac] hover:bg-[#f1f5f1] sm:text-base"
-                            onClick={() =>
-                                alert("GitHub authentication এখনো যুক্ত করা হয়নি।")
-                            }
+                            onClick={handleGithubSignIn}
                         >
                             <SiGithub size={20} />
                             GitHub দিয়ে চালিয়ে যান

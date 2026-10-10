@@ -2,7 +2,8 @@ const page = async ({ params }) => {
     const { productDetailsId } = await params;
 
     const res = await fetch(
-        `https://api.api-store.workers.dev/api/bazardor/products/${productDetailsId}`
+        // `https://api.api-store.workers.dev/api/bazardor/products/${productDetailsId}`
+        ` https://openapi.programming-hero.com/api/bazardor/products/${productDetailsId}`
     );
 
     const data = await res.json();
@@ -219,8 +220,8 @@ const page = async ({ params }) => {
                                             <tr
                                                 key={index}
                                                 className={`border-t border-[#dce5df] text-sm text-[#303a35] ${index % 2 === 0
-                                                        ? "bg-[#f8fbf9]"
-                                                        : "bg-[#eef5f0]"
+                                                    ? "bg-[#f8fbf9]"
+                                                    : "bg-[#eef5f0]"
                                                     }`}
                                             >
                                                 <td className="px-4 py-4 font-medium">

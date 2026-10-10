@@ -1,4 +1,5 @@
 "use client"
+import { handleSignOut } from "@/lib/handleSignOut";
 // import { Search, User, ShoppingCart } from "lucide-react"
 import Image from "next/image";
 // import { useEffect, useState } from "react"
@@ -7,14 +8,14 @@ import Link from "next/link";
 import DateDisplay from "./DisplayDate";
 import { Suspense } from "react";
 import { usePathname } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
     const pathname = usePathname()
-    const user = {
-        name: "Shantay Chandra Paul",
-        email: "shanto@gmail.com",
-        image: "https://img.magnific.com/free-photo/cute-ai-generated-cartoon-bunny_23-2150288884.jpg?semt=ais_hybrid&w=740&q=80",
-    };
+    const { data: session } = authClient.useSession()
+    const user = session?.user
+
+    // console.log(user, " from navbar");
     return (
         <div className="bg-white sticky top-0 z-50 ">
 
@@ -59,58 +60,84 @@ const Navbar = () => {
                         </Link>
                     </div> */}
                     {/* profile */}
-                    <div className="dropdown dropdown-end">
-                        <button
-                            tabIndex={0}
-                            className="btn h-auto min-h-0 gap-3 border-0 bg-transparent p-2 text-left shadow-none hover:bg-gray-100"
-                        >
-                            <Image
-                                src={user.image}
-                                alt={user.name}
-                                width={60}
-                                height={60}
-                                unoptimized
-                                className="h-15 w-15 rounded-xl object-cover"
-                            />
 
-                            <span className="font-semibold text-gray-800">
-                                {user.name}
-                            </span>
-                        </button>
+                    {
+                        user ? <div className="dropdown dropdown-end">
+                            <button
+                                tabIndex={0}
+                                className="btn h-auto min-h-0 gap-3 border-0 bg-transparent p-2 text-left shadow-none hover:bg-gray-100"
+                            >
+                                <Image
+                                    src={user.image}
+                                    alt={user.name}
+                                    width={60}
+                                    height={60}
+                                    unoptimized
+                                    className="h-15 w-15 rounded-xl object-cover"
+                                />
 
-                        <ul
-                            tabIndex={0}
-                            className="dropdown-content menu z-50 mt-2 w-72 rounded-2xl border border-gray-200 bg-white p-3 shadow-lg"
-                        >
-                            <li className="pointer-events-none mb-2 border-b border-gray-200 pb-3">
-                                <div className="flex flex-col items-start gap-1">
-                                    <span className="font-semibold text-gray-800">
-                                        {user.name}
-                                    </span>
-                                    <span className="text-sm text-gray-500">
-                                        {user.email}
-                                    </span>
-                                </div>
-                            </li>
+                                <span className="font-semibold text-gray-800">
+                                    {user.name}
+                                </span>
+                            </button>
 
-                            <li>
-                                <Link href="/profile" className="py-3">
-                                    <span>👤</span>
-                                    আমার প্রোফাইল
-                                </Link>
-                            </li>
+                            <ul
+                                tabIndex={0}
+                                className="dropdown-content menu z-50 mt-2 w-72 rounded-2xl border border-gray-200 bg-white p-3 shadow-lg"
+                            >
+                                <li className="pointer-events-none mb-2 border-b border-gray-200 pb-3">
+                                    <div className="flex flex-col items-start gap-1">
+                                        <span className="font-semibold text-gray-800">
+                                            {user.name}
+                                        </span>
+                                        <span className="text-sm text-gray-500">
+                                            {user.email}
+                                        </span>
+                                    </div>
+                                </li>
 
-                            <li>
-                                <button
-                                    type="button"
-                                    className="py-3 text-red-500 hover:bg-red-50 hover:text-red-600"
+                                <li>
+                                    <Link href="/profile" className="py-3">
+                                        <span>👤</span>
+                                        আমার প্রোফাইল
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <button
+                                        onClick={handleSignOut}
+                                        type="button"
+                                        className="py-3 text-red-500 hover:bg-red-50 hover:text-red-600"
+                                    >
+                                        <span>↩</span>
+                                        সাইন আউট
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                            : <div className="flex items-center gap-3">
+                                <Link
+                                    href="/signin"
+                                    className={`${pathname === "/signin"
+                                        ? "bg-[#05893E] btn text-white"
+                                        : "btn"
+                                        }`}
                                 >
-                                    <span>↩</span>
-                                    সাইন আউট
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+                                    সাইন ইন
+                                </Link>
+
+                                <Link
+                                    href="/signup"
+                                    className={`${pathname === "/signup" || pathname === "/"
+                                        ? "bg-[#05893E] btn text-white"
+                                        : "btn"
+                                        }`}
+                                >
+                                    সাইন আপ
+                                </Link>
+                            </div>
+                    }
+
 
                 </div>
             </div>

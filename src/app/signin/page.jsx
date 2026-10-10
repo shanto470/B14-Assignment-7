@@ -1,9 +1,44 @@
-
+'use client'
 import Link from "next/link";
 import { SiGoogle, SiGithub } from "@icons-pack/react-simple-icons";
 import { ArrowLeft } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target)
+        const user = Object.fromEntries(formData.entries())
+        // console.log(user, "from signup page");
+        const { data, error } = await authClient.signIn.email({
+            ...user,
+            callbackURL: "/"
+        })
+        if (data) {
+            console.log(data, "from sign in");
+            toast.success("Sign In Successful")
+            redirect("/")
+
+
+        }
+        if (error) {
+            toast.error(error.message)
+            // console.log(error);
+        }
+    };
+    const handleGoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    };
+
+    const handleGithubSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "github",
+        });
+    };
+
     return (
         <main className="min-h-screen bg-[#f0f5f0] px-4 py-10 sm:py-12">
             <div className="mx-auto w-full max-w-[546px]">
@@ -18,7 +53,7 @@ export default function LoginPage() {
                 </div>
 
                 <div className="rounded-[22px] border border-[#dce5dc] bg-[#fbfcfb] p-6 shadow-sm sm:p-8">
-                    <form className="space-y-8">
+                    <form onSubmit={handleSubmit} className="space-y-8">
                         <div>
                             <label
                                 htmlFor="email"
@@ -74,6 +109,7 @@ export default function LoginPage() {
 
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         <button
+                            onClick={handleGoogleSignIn}
                             type="button"
                             className="btn h-[53px] min-h-[53px] rounded-xl border border-[#dce5dc] bg-transparent text-sm font-semibold text-[#263128] shadow-none transition hover:border-[#aab9ac] hover:bg-[#f1f5f1] sm:text-base"
 
@@ -83,6 +119,7 @@ export default function LoginPage() {
                         </button>
 
                         <button
+                            onClick={handleGithubSignIn}
                             type="button"
                             className="btn h-[53px] min-h-[53px] rounded-xl border border-[#dce5dc] bg-transparent text-sm font-semibold text-[#263128] shadow-none transition hover:border-[#aab9ac] hover:bg-[#f1f5f1] sm:text-base"
 
