@@ -70,7 +70,7 @@ const Navbar = () => {
                                 width={60}
                                 height={60}
                                 unoptimized
-                                className="h-[60px] w-[60px] rounded-xl object-cover"
+                                className="h-15 w-15 rounded-xl object-cover"
                             />
 
                             <span className="font-semibold text-gray-800">

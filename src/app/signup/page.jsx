@@ -5,22 +5,30 @@ import Link from "next/link";
 // import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { SiGoogle, SiGithub } from "@icons-pack/react-simple-icons";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function SignupPage() {
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert("দুটি পাসওয়ার্ড মিলছে না!");
-            return;
+        const formData = new FormData(e.target)
+        const user = Object.fromEntries(formData.entries())
+        // console.log(user, "from signup page");
+        const { data, error } = await authClient.signUp.email({
+            ...user,
+            callbackURL: "/"
+        })
+        if (data) {
+            console.log(data);
+            redirect("/")
+        }
+        if (error) {
+            console.log(error);
         }
 
-        if (password.length < 8) {
-            alert("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
-            return;
-        }
 
 
     };
@@ -49,9 +57,28 @@ export default function SignupPage() {
                             </label>
 
                             <input
+                                name="name"
                                 id="name"
                                 type="text"
                                 placeholder="যেমন: রহিম উদ্দিন"
+
+                                className="input h-[53px] w-full rounded-xl border border-[#dce5dc] bg-transparent px-4 text-base text-[#263128] outline-none transition focus:border-[#008b43] focus:outline-none"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label
+                                htmlFor="name"
+                                className="mb-2 block text-lg font-medium text-[#263128]"
+                            >
+                                ছবি
+                            </label>
+
+                            <input
+                                name="image"
+                                id="name"
+                                type="url"
+                                placeholder="ছবি"
 
                                 className="input h-[53px] w-full rounded-xl border border-[#dce5dc] bg-transparent px-4 text-base text-[#263128] outline-none transition focus:border-[#008b43] focus:outline-none"
                                 required
@@ -67,7 +94,7 @@ export default function SignupPage() {
                             </label>
 
                             <input
-                                id="email"
+                                name="email"
                                 type="email"
                                 placeholder="you@example.com"
 
@@ -86,7 +113,8 @@ export default function SignupPage() {
                             </label>
 
                             <input
-                                id="password"
+                                name="password"
+
                                 type="password"
                                 placeholder="কমপক্ষে ৮ অক্ষর"
 
@@ -105,7 +133,7 @@ export default function SignupPage() {
                             </label>
 
                             <input
-                                id="confirmPassword"
+                                name="confirmPassword"
                                 type="password"
                                 placeholder="আবার লিখুন"
 

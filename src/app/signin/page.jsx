@@ -28,7 +28,7 @@ export default function LoginPage() {
                             </label>
 
                             <input
-                                id="email"
+                                name="email"
                                 type="email"
                                 placeholder="you@example.com"
 
@@ -47,7 +47,7 @@ export default function LoginPage() {
                             </label>
 
                             <input
-                                id="password"
+                                name="password"
                                 type="password"
                                 placeholder="কমপক্ষে ৮ অক্ষর"
 
