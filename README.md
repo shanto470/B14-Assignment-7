@@ -4,9 +4,6 @@
 <p align="center">
   <strong>Know the Market. Compare the Prices. Shop Smarter.</strong>
 </p>
-<p align="center">
-  <strong>Know the Market. Compare the Prices. Shop Smarter.</strong>
-</p>
 
 <p align="center">
   A web-based platform to explore daily market prices and compare the cost of essential products across different markets in Bangladesh.
