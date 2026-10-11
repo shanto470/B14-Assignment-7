@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 const page = async ({ params }) => {
     const { productDetailsId } = await params;
 
@@ -7,6 +9,9 @@ const page = async ({ params }) => {
     );
 
     const data = await res.json();
+    if (!data || !data.id) {
+        notFound();
+    }
 
     console.log(data, "from details page");
 

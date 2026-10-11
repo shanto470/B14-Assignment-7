@@ -1,17 +1,27 @@
 import Sorting from "@/components/Sorting";
+import { notFound } from "next/navigation";
 
 const page = async ({ params }) => {
     const { category } = await params;
 
     const res = await fetch(
-        // `https://api.api-store.workers.dev/api/bazardor/products?category=${category}`
         `https://openapi.programming-hero.com/api/bazardor/products?category=${category}`
     );
 
+    if (!res.ok) {
+        throw new Error("Failed to fetch products");
+    }
+
     const products = await res.json();
+
+    // Invalid category হলে 404 page দেখাবে
+    if (!Array.isArray(products) || products.length === 0) {
+        notFound();
+    }
 
     const categoryName = products[0]?.categoryNameBn || category;
     const categoryIcon = products[0]?.categoryIcon || "🛒";
+
 
     return (
         <main className="min-h-screen bg-[#f3f7f4] py-7">
