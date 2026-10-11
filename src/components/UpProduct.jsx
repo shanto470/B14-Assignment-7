@@ -14,7 +14,7 @@ const UpProduct = ({ products }) => {
 
 
     return (
-        <div className="grid grid-cols-3 gap-5 ">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5">
             {upProducts.map((product) => (
                 <Link href={`/productDetails/${product.id}`} key={product.id} className="flex items-end justify-between gap-2 rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 lg:p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-gray-300">
                     <div>
