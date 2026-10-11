@@ -14,7 +14,7 @@ export default function Home() {
         <section className="container mx-auto mt-5 flex items-center font-sans sm:mt-6 md:mt-7">
           <div className="flex w-full flex-col items-center justify-between gap-5 rounded-3xl border border-gray-100 bg-white/60 p-4 shadow-sm backdrop-blur-sm sm:gap-6 sm:p-5 md:mt-0 md:flex-row md:gap-6 md:p-6 lg:gap-10">
 
-            <div className="mt-0 w-full md:-mt-12">
+            <div className="mt-0 w-full">
               <div className="inline-block rounded-full bg-[#e2f0e6] px-3 py-1.5 text-xs font-medium text-[#1b7a43] sm:px-4 sm:text-sm">
                 <Suspense fallback={null}>
                   <DateDisplay />

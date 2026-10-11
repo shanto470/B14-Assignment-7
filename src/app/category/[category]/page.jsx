@@ -47,7 +47,7 @@ const page = async ({ params }) => {
                     </div>
                 </section>
 
-                {/* Sorting + Products */}
+
                 <section className="mt-7 rounded-2xl border border-[#dce5df] bg-white px-6 py-5">
                     <Sorting products={products} />
                 </section>

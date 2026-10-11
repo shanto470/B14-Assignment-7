@@ -5,7 +5,7 @@ import Link from "next/link";
 const AllProducts = ({ product }) => {
     return (
         <Link href={`/productDetails/${product.id}`} >
-            <div className="flex items-end justify-between gap-2 rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 lg:p-5">
+            <div className="flex items-end justify-between gap-2 rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 lg:p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-gray-300">
                 <div className="min-w-0">
                     <div className="flex gap-2">
                         <div className="rounded-xl bg-[#eff4f0] p-2 text-center">

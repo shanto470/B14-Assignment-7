@@ -14,7 +14,7 @@ const DownProduct = ({ products }) => {
                 <Link
                     href={`/productDetails/${product.id}`}
                     key={product.id}
-                    className="flex items-end justify-between gap-2 rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 lg:p-5"
+                    className="flex items-end justify-between gap-2 rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 lg:p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-gray-300"
                 >
                     <div className="min-w-0">
                         <div className="flex gap-2">
