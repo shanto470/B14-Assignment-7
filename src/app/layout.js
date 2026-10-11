@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MarquePage from "@/components/Marquee";
 import { Toaster } from "react-hot-toast";
+import SocialLoginToast from "@/components/SocialLoginToast";
 
 
 export const metadata = {
@@ -25,7 +26,8 @@ export default function RootLayout({ children }) {
 
         {children}
         <Footer></Footer>
-        <Toaster />
+        <SocialLoginToast />
+        <Toaster autoClose={3000} />
       </body>
     </html>
   );

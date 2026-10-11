@@ -3,7 +3,7 @@ const page = async ({ params }) => {
 
     const res = await fetch(
         // `https://api.api-store.workers.dev/api/bazardor/products/${productDetailsId}`
-        ` https://openapi.programming-hero.com/api/bazardor/products/${productDetailsId}`
+        `https://openapi.programming-hero.com/api/bazardor/products/${productDetailsId}`
     );
 
     const data = await res.json();

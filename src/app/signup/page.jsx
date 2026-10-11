@@ -6,13 +6,13 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { SiGoogle, SiGithub } from "@icons-pack/react-simple-icons";
 // import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
-
+    const router = useRouter();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -24,9 +24,9 @@ export default function SignupPage() {
             callbackURL: "/"
         })
         if (data) {
-            console.log(data);
-            toast.success("Sign Up Successful")
-            redirect("/")
+            toast.success("Sign Up Successful!");
+            router.push("/");
+            router.refresh();
 
         }
         if (error) {
@@ -37,14 +37,40 @@ export default function SignupPage() {
 
     };
     const handleGoogleSignIn = async () => {
-        const data = await authClient.signIn.social({
-            provider: "google",
-        });
+        sessionStorage.setItem("socialLoginPending", "google");
+
+        try {
+            const { error } = await authClient.signIn.social({
+                provider: "google",
+            });
+
+            if (error) {
+                sessionStorage.removeItem("socialLoginPending");
+                toast.error(error.message || "Google Sign In Failed");
+            }
+        } catch (error) {
+            sessionStorage.removeItem("socialLoginPending");
+            toast.error("Google Sign In Failed");
+        }
     };
+
     const handleGithubSignIn = async () => {
-        const data = await authClient.signIn.social({
-            provider: "github",
-        });
+        sessionStorage.setItem("socialLoginPending", "github");
+
+        try {
+            const { data, error } = await authClient.signIn.social({
+                provider: "github",
+            });
+            console.log(data, "github login");
+
+            if (error) {
+                sessionStorage.removeItem("socialLoginPending");
+                toast.error(error.message || "GitHub Sign In Failed");
+            }
+        } catch (error) {
+            sessionStorage.removeItem("socialLoginPending");
+            toast.error("GitHub Sign In Failed");
+        }
     };
 
     return (

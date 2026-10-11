@@ -1,67 +1,99 @@
+"use client";
 
 import { Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import UpProduct from "./UpProduct";
 import DownProduct from "./DownProduct";
 import AllProducts from "./AllProducts";
+import ProductSkeleton from "./skeleton/ProductSkeleton";
+
+
 const MainPage = () => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-
         const getProducts = async () => {
+            try {
+                const res = await fetch(
+                    "https://openapi.programming-hero.com/api/bazardor/products"
+                );
 
-            const res = await fetch(
-                // "https://api.api-store.workers.dev/api/bazardor/products"
-                "https://openapi.programming-hero.com/api/bazardor/products"
-            );
+                if (!res.ok) {
+                    throw new Error("Failed to fetch products");
+                }
 
-            const data = await res.json();
+                const data = await res.json();
+                setProducts(data);
 
-            setProducts(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
         };
+
         getProducts();
-
     }, []);
-    // console.log(products);
+
     return (
+        <section className="container m-auto mt-10">
 
-        <section className=" container m-auto mt-10">
             <section>
-                <div className=" flex gap-2 items-center mb-3 "> <Play className="text-red-500 -rotate-90 fill-current" />
-                    <h2 className=" text-[28px] font-bold text-black">আজ দাম বেড়েছে</h2>
+                <div className="mb-3 flex items-center gap-2">
+                    <Play className="-rotate-90 fill-current text-red-500" />
+                    <h2 className="text-[28px] font-bold text-black">
+                        আজ দাম বেড়েছে
+                    </h2>
                 </div>
-                <div>
-                    {
-                        // products.map(product => <UpProduct key={product.id} product={product}></UpProduct>)
-                        <UpProduct products={products} ></UpProduct>
-                    }
-                </div>
+
+                {loading ? (
+                    <ProductSkeleton count={6} />
+                ) : (
+                    <UpProduct products={products} />
+                )}
             </section>
+
             <section className="mt-10">
-                <div className=" flex gap-2 items-center mb-3 "> <Play className="text-green-500 rotate-90 fill-current" />
-                    <h2 className=" text-[28px] font-bold text-black">আজ দাম কমেছে</h2>
-                </div>
-                <div>
-                    {
-                        <DownProduct products={products}></DownProduct>
-                    }
+                <div className="mb-3 flex items-center gap-2">
+                    <Play className="rotate-90 fill-current text-green-500" />
+                    <h2 className="text-[28px] font-bold text-black">
+                        আজ দাম কমেছে
+                    </h2>
                 </div>
 
-
+                {loading ? (
+                    <ProductSkeleton count={6} />
+                ) : (
+                    <DownProduct products={products} />
+                )}
             </section>
+
             <section className="mt-10">
-                <div className="  r mb-3 ">
-                    <h2 className=" text-[28px] font-bold text-black"> সব পণ্য</h2>
-                    <p className="text-[14px] text-gray-700">  মোট {products.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে</p>
+                <div className="mb-3">
+                    <h2 className="text-[28px] font-bold text-black">
+                        সব পণ্য
+                    </h2>
+
+                    <p className="text-[14px] text-gray-700">
+                        মোট {loading ? "..." : products.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-5 ">{
-                    products.map(product => <AllProducts key={product.id} product={product}></AllProducts>)
-                }</div>
+                {loading ? (
+                    <ProductSkeleton count={9} />
+                ) : (
+                    <div className="grid grid-cols-3 gap-5">
+                        {products.map((product) => (
+                            <AllProducts
+                                key={product.id}
+                                product={product}
+                            />
+                        ))}
+                    </div>
+                )}
             </section>
         </section>
-
     );
 };
 

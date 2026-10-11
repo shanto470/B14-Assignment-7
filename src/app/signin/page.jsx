@@ -4,39 +4,87 @@ import { SiGoogle, SiGithub } from "@icons-pack/react-simple-icons";
 import { ArrowLeft } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 export default function LoginPage() {
+    const router = useRouter();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target)
-        const user = Object.fromEntries(formData.entries())
-        // console.log(user, "from signup page");
+
+        const formData = new FormData(e.currentTarget);
+        const user = Object.fromEntries(formData.entries());
+
         const { data, error } = await authClient.signIn.email({
             ...user,
-            callbackURL: "/"
-        })
-        if (data) {
-            console.log(data, "from sign in");
-            toast.success("Sign In Successful")
-            redirect("/")
+        });
 
-
-        }
         if (error) {
-            toast.error(error.message)
-            // console.log(error);
+            toast.error(error.message || "Sign In Failed");
+            return;
+        }
+
+        if (data) {
+            toast.success("Sign In Successful!");
+            router.push("/");
+            router.refresh();
         }
     };
+    // const handleGoogleSignIn = async () => {
+    //     const { data, error } = await authClient.signIn.social({
+    //         provider: "google",
+    //     });
+
+    //     if (error) {
+    //         toast.error(error.message || "Google Sign In Failed");
+    //         return;
+    //     }
+
+    //     if (data) {
+    //         toast.success("Google Sign In Successful!");
+    //     }
+    // };
+
+    // const handleGithubSignIn = async () => {
+    //     const data = await authClient.signIn.social({
+    //         provider: "github",
+    //     });
+    // };
+
     const handleGoogleSignIn = async () => {
-        const data = await authClient.signIn.social({
-            provider: "google",
-        });
+        sessionStorage.setItem("socialLoginPending", "google");
+
+        try {
+            const { error } = await authClient.signIn.social({
+                provider: "google",
+            });
+
+            if (error) {
+                sessionStorage.removeItem("socialLoginPending");
+                toast.error(error.message || "Google Sign In Failed");
+            }
+        } catch (error) {
+            sessionStorage.removeItem("socialLoginPending");
+            toast.error("Google Sign In Failed");
+        }
     };
 
     const handleGithubSignIn = async () => {
-        const data = await authClient.signIn.social({
-            provider: "github",
-        });
+        sessionStorage.setItem("socialLoginPending", "github");
+
+        try {
+            const { error } = await authClient.signIn.social({
+                provider: "github",
+            });
+
+            if (error) {
+                sessionStorage.removeItem("socialLoginPending");
+                toast.error(error.message || "GitHub Sign In Failed");
+            }
+        } catch (error) {
+            sessionStorage.removeItem("socialLoginPending");
+            toast.error("GitHub Sign In Failed");
+        }
     };
 
     return (

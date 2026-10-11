@@ -1,13 +1,37 @@
 
 "use client";
 import { handleSignOut } from "@/lib/handleSignOut";
-import LoaderSkeleton from "@/components/LoaderSkeleton";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import LoaderSkeleton from "@/components/skeleton/LoaderSkeleton";
 
 export default function ProfilePage() {
     const { data: session, isPending } = authClient.useSession();
     const user = session?.user;
+
+    const handleUpdateProfile = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const newUserData = Object.fromEntries(formData.entries());
+
+        const { data, error } = await authClient.updateUser({
+            ...newUserData
+        });
+
+        if (error) {
+            // console.log(error);
+            toast.error(error.message);
+            return;
+        }
+
+        if (data) {
+            toast.success("Profile Updated Successfully");
+            // console.log(data);
+        }
+    };
+
 
     if (isPending) {
         return <LoaderSkeleton type="profile" />;
@@ -64,19 +88,20 @@ export default function ProfilePage() {
                             তথ্য
                         </h2>
 
-                        <form className="mt-6">
+                        <form onSubmit={handleUpdateProfile} className="mt-6">
                             <label className="label mb-2 text-base text-gray-800">
                                 নাম
                             </label>
 
                             <input
                                 type="text"
+                                name="name"
                                 defaultValue={user.name || ""}
                                 className="input input-bordered w-full border-gray-200 bg-transparent focus:border-green-600 focus:outline-none"
                             />
 
                             <button
-                                type="button"
+                                type="submit"
                                 className="btn mt-5 w-full border-none bg-green-700 text-white hover:bg-green-800"
                             >
                                 আপডেট
