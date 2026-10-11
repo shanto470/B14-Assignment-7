@@ -1,5 +1,9 @@
 # 🛒 বাজার দর | BazarDor
 
+
+<p align="center">
+  <strong>Know the Market. Compare the Prices. Shop Smarter.</strong>
+</p>
 <p align="center">
   <strong>Know the Market. Compare the Prices. Shop Smarter.</strong>
 </p>
