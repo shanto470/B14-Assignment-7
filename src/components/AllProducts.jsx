@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const AllProducts = ({ product }) => {
     return (
-        <Link href={`/productDetails/${product.id}`}>
+        <Link href={`/productDetails/${product.id}`} >
             <div className="flex items-end justify-between gap-2 rounded-2xl border border-gray-200 bg-white p-3 sm:p-4 lg:p-5">
                 <div className="min-w-0">
                     <div className="flex gap-2">
@@ -34,8 +34,8 @@ const AllProducts = ({ product }) => {
 
                 <div
                     className={`flex shrink-0 items-center gap-1 rounded-2xl bg-[#eff4f0] px-2 py-1 text-sm sm:gap-2 sm:px-4 ${product.change.dir === "up"
-                            ? "text-red-500"
-                            : "text-green-500"
+                        ? "text-red-500"
+                        : "text-green-500"
                         }`}
                 >
                     <Play className="h-3 w-3 shrink-0 rotate-90 fill-current" />

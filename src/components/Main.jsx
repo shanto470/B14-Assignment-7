@@ -68,7 +68,7 @@ const MainPage = () => {
                 )}
             </section>
 
-            <section className="mt-8 sm:mt-10">
+            <section className="mt-8 sm:mt-10 scroll-mt-32 " id="all-products" >
                 <div className="mb-3">
                     <h2 className="text-xl font-bold text-black sm:text-2xl md:text-[28px]">
                         সব পণ্য

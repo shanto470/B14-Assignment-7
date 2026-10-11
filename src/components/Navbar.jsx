@@ -21,14 +21,14 @@ const Navbar = () => {
                 <div className="container mx-auto flex flex-wrap items-center justify-between gap-2 px-3 py-3 sm:px-4 md:flex-nowrap lg:px-0">
 
                     <div className="mb-1 flex items-center gap-2 sm:mb-3">
-                        <div className="rounded-xl bg-[#05893E] px-2.5 py-2.5">
+                        <Link href='/' className="rounded-xl bg-[#05893E] px-4 py-4">
                             <Image
                                 src="/logo-icon.png"
                                 height={20}
                                 width={20}
                                 alt="logo"
                             />
-                        </div>
+                        </Link>
 
                         <div>
                             <Link

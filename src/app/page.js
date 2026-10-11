@@ -4,6 +4,7 @@
 import DateDisplay from "@/components/DisplayDate";
 import MainPage from "@/components/Main";
 import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -31,9 +32,9 @@ export default function Home() {
               </p>
 
               <div className="pt-3 sm:pt-2">
-                <button className="rounded-lg bg-[#008744] px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#007239] hover:shadow-lg sm:px-6 sm:text-base">
+                <Link href="#all-products" className="rounded-lg bg-[#008744] px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#007239] hover:shadow-lg sm:px-6 sm:text-base">
                   সব পণ্য দেখুন
-                </button>
+                </Link>
               </div>
             </div>
 

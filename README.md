@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛒 বাজার দর | BazarDor
 
-## Getting Started
+<p align="center">
+  <strong>Know the Market. Compare the Prices. Shop Smarter.</strong>
+</p>
 
-First, run the development server:
+<p align="center">
+  A web-based platform to explore daily market prices and compare the cost of essential products across different markets in Bangladesh.
+</p>
+
+---
+
+## 📖 About The Project
+
+**BazarDor (বাজার দর)** is a market price tracking web application designed to help people stay informed about the prices of everyday essentials in Bangladesh.
+
+Users can browse products by category, compare market prices, and quickly identify products whose prices have increased or decreased.
+
+## 🚀 Technologies Used
+
+<p>
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/daisyUI-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white" alt="daisyUI" />
+</p>
+
+- **Next.js** — Application framework
+- **React** — User interface development
+- **JavaScript** — Application logic
+- **Tailwind CSS** — Responsive styling
+- **daisyUI** — UI components
+- **Lucide React** — Icons
+- **REST API** — Product, category, and market price data
+- **Better Auth** — Authentication
+- **React Hot Toast** — Notifications
+
+## ✨ Key Features
+
+### 1. 📊 Product Price Tracking
+View the latest available prices of everyday essential products.
+
+### 2. 📈 Price Increase & Decrease
+Quickly identify products whose prices have increased or decreased.
+
+### 3. 🏷️ Category-Based Browsing
+Browse products by categories such as rice, lentils, oil, vegetables, fish, meat, and eggs.
+
+### 4. ⚖️ Market Price Comparison
+Compare minimum and maximum prices across different markets to make informed purchasing decisions.
+
+### 5. 🔐 User Authentication
+Sign up, sign in, and access profile-related features.
+
+## 📱 Responsive Design
+
+BazarDor is designed to work across:
+
+- 📱 Mobile devices
+- 📲 Tablets
+- 💻 Desktop computers
+
+## ⚙️ Installation & Setup
+
+### Prerequisites
+
+- Node.js
+- npm
+
+### Steps
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/shanto470/B14-Assignment-7
+```
+
+**2. Navigate to the project folder**
+
+```bash
+cd B14-assignment-7
+```
+
+**3. Install dependencies**
+
+```bash
+npm install
+```
+
+**4. Start the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**5. Open the application**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👨‍💻 Developer
 
-## Learn More
+**Shantay Chandra Paul**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<p align="center">
+  <strong>বাজার দর — বাজারের দামের খবর, এক জায়গায়। 🇧🇩</strong>
+</p>

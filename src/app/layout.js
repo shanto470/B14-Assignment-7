@@ -1,11 +1,17 @@
-
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import MarquePage from "@/components/Marquee";
 import { Toaster } from "react-hot-toast";
 import SocialLoginToast from "@/components/SocialLoginToast";
+import { Hind_Siliguri } from "next/font/google";
 
+const hindSiliguri = Hind_Siliguri({
+  subsets: ["bengali", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-hind-siliguri",
+  display: "swap",
+});
 
 export const metadata = {
   title: "বাজার দর",
@@ -15,16 +21,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
+      lang="bn"
       data-theme="light"
-      className={` h-full antialiased`}
+      className={`${hindSiliguri.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar></Navbar>
-        <MarquePage></MarquePage>
+        <Navbar />
+        <MarquePage />
 
         {children}
-        <Footer></Footer>
+
+        <Footer />
         <SocialLoginToast />
         <Toaster autoClose={3000} />
       </body>
