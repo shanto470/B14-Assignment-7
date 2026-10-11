@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Play } from "lucide-react";
@@ -6,7 +7,6 @@ import UpProduct from "./UpProduct";
 import DownProduct from "./DownProduct";
 import AllProducts from "./AllProducts";
 import ProductSkeleton from "./skeleton/ProductSkeleton";
-
 
 const MainPage = () => {
     const [products, setProducts] = useState([]);
@@ -25,7 +25,6 @@ const MainPage = () => {
 
                 const data = await res.json();
                 setProducts(data);
-
             } catch (error) {
                 console.error(error);
             } finally {
@@ -37,12 +36,12 @@ const MainPage = () => {
     }, []);
 
     return (
-        <section className="container m-auto mt-10">
+        <section className="container mx-auto mt-10 px-3 sm:px-4 lg:px-0">
 
             <section>
                 <div className="mb-3 flex items-center gap-2">
                     <Play className="-rotate-90 fill-current text-red-500" />
-                    <h2 className="text-[28px] font-bold text-black">
+                    <h2 className="text-xl font-bold text-black sm:text-2xl md:text-[28px]">
                         আজ দাম বেড়েছে
                     </h2>
                 </div>
@@ -54,10 +53,10 @@ const MainPage = () => {
                 )}
             </section>
 
-            <section className="mt-10">
+            <section className="mt-8 sm:mt-10">
                 <div className="mb-3 flex items-center gap-2">
                     <Play className="rotate-90 fill-current text-green-500" />
-                    <h2 className="text-[28px] font-bold text-black">
+                    <h2 className="text-xl font-bold text-black sm:text-2xl md:text-[28px]">
                         আজ দাম কমেছে
                     </h2>
                 </div>
@@ -69,13 +68,13 @@ const MainPage = () => {
                 )}
             </section>
 
-            <section className="mt-10">
+            <section className="mt-8 sm:mt-10">
                 <div className="mb-3">
-                    <h2 className="text-[28px] font-bold text-black">
+                    <h2 className="text-xl font-bold text-black sm:text-2xl md:text-[28px]">
                         সব পণ্য
                     </h2>
 
-                    <p className="text-[14px] text-gray-700">
+                    <p className="text-sm text-gray-700">
                         মোট {loading ? "..." : products.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে
                     </p>
                 </div>
@@ -83,7 +82,7 @@ const MainPage = () => {
                 {loading ? (
                     <ProductSkeleton count={9} />
                 ) : (
-                    <div className="grid grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
                         {products.map((product) => (
                             <AllProducts
                                 key={product.id}
@@ -93,6 +92,7 @@ const MainPage = () => {
                     </div>
                 )}
             </section>
+
         </section>
     );
 };

@@ -1,8 +1,8 @@
-"use client"
+
+"use client";
+
 import { handleSignOut } from "@/lib/handleSignOut";
-// import { Search, User, ShoppingCart } from "lucide-react"
 import Image from "next/image";
-// import { useEffect, useState } from "react"
 import NavLink from "./NavLink";
 import Link from "next/link";
 import DateDisplay from "./DisplayDate";
@@ -11,86 +11,71 @@ import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
-    const pathname = usePathname()
-    const { data: session } = authClient.useSession()
-    const user = session?.user
+    const pathname = usePathname();
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
 
-    // console.log(user, " from navbar");
     return (
-        <div className="bg-white sticky top-0 z-50 ">
-
+        <div className="bg-white sticky top-0 z-50">
             <div className="border-b border-b-[#F0F5F0]">
-                <div className="container m-auto flex justify-between items-center py-3 ">
-                    <div className=" flex justify-between items-center gap-2 mb-3">
-                        <div className="bg-[#05893E] px-2.5 py-2.5 rounded-xl"> <Image className="" src={'/logo-icon.png'} height={20} width={20} alt='logo' /></div>
-                        <div className="">
-                            <Link href={'/'} className="text-black font-bold text-[28px] leading-none m-0">
+                <div className="container mx-auto flex flex-wrap items-center justify-between gap-2 px-3 py-3 sm:px-4 md:flex-nowrap lg:px-0">
+
+                    <div className="mb-1 flex items-center gap-2 sm:mb-3">
+                        <div className="rounded-xl bg-[#05893E] px-2.5 py-2.5">
+                            <Image
+                                src="/logo-icon.png"
+                                height={20}
+                                width={20}
+                                alt="logo"
+                            />
+                        </div>
+
+                        <div>
+                            <Link
+                                href="/"
+                                className="m-0 text-xl font-bold leading-none text-black sm:text-2xl md:text-[28px]"
+                            >
                                 বাজার দর
                             </Link>
-                            <p className="text-gray-700 text-[16px] leading-none mt-1">
-                                {/* {date}
-                             */}
-                                <Suspense fallback={null}>
 
-                                    <DateDisplay></DateDisplay>
+                            <p className="mt-1 text-xs leading-tight text-gray-700 sm:text-sm md:text-[16px]">
+                                <Suspense fallback={null}>
+                                    <DateDisplay />
                                 </Suspense>
                             </p>
                         </div>
                     </div>
-                    {/* sign up and sign in */}
-                    {/* <div className="flex items-center gap-3">
-                        <Link
-                            href="/signin"
-                            className={`${pathname === "/signin"
-                                ? "bg-[#05893E] btn text-white"
-                                : "btn"
-                                }`}
-                        >
-                            সাইন ইন
-                        </Link>
 
-                        <Link
-                            href="/signup"
-                            className={`${pathname === "/signup" || pathname === "/"
-                                ? "bg-[#05893E] btn text-white"
-                                : "btn"
-                                }`}
-                        >
-                            সাইন আপ
-                        </Link>
-                    </div> */}
-                    {/* profile */}
-
-                    {
-                        user ? <div className="dropdown dropdown-end">
+                    {user ? (
+                        <div className="dropdown dropdown-end">
                             <button
                                 tabIndex={0}
-                                className="btn h-auto min-h-0 gap-3 border-0 bg-transparent p-2 text-left shadow-none hover:bg-gray-100"
+                                className="btn h-auto min-h-0 gap-2 border-0 bg-transparent p-1.5 text-left shadow-none hover:bg-gray-100 sm:gap-3 sm:p-2"
                             >
                                 <Image
-                                    src={user.image}
-                                    alt={user.name}
+                                    src={user.image || "/default-avatar.png"}
+                                    alt={user.name || "Profile"}
                                     width={60}
                                     height={60}
                                     unoptimized
-                                    className="h-15 w-15 rounded-xl object-cover"
+                                    className="h-9 w-9 rounded-lg object-cover sm:h-12 sm:w-12 md:h-15 md:w-15"
                                 />
 
-                                <span className="font-semibold text-gray-800">
+                                <span className="max-w-[100px] truncate text-sm font-semibold text-gray-800 sm:max-w-[150px] sm:text-base md:max-w-none">
                                     {user.name}
                                 </span>
                             </button>
 
                             <ul
                                 tabIndex={0}
-                                className="dropdown-content menu z-50 mt-2 w-72 rounded-2xl border border-gray-200 bg-white p-3 shadow-lg"
+                                className="dropdown-content menu z-50 mt-2 w-[min(18rem,calc(100vw-1.5rem))] rounded-2xl border border-gray-200 bg-white p-3 shadow-lg"
                             >
                                 <li className="pointer-events-none mb-2 border-b border-gray-200 pb-3">
                                     <div className="flex flex-col items-start gap-1">
-                                        <span className="font-semibold text-gray-800">
+                                        <span className="max-w-full break-words font-semibold text-gray-800">
                                             {user.name}
                                         </span>
-                                        <span className="text-sm text-gray-500">
+                                        <span className="max-w-full break-all text-sm text-gray-500">
                                             {user.email}
                                         </span>
                                     </div>
@@ -115,34 +100,34 @@ const Navbar = () => {
                                 </li>
                             </ul>
                         </div>
-                            : <div className="flex items-center gap-3">
-                                <Link
-                                    href="/signin"
-                                    className={`${pathname === "/signin"
-                                        ? "bg-[#05893E] btn text-white"
-                                        : "btn"
-                                        }`}
-                                >
-                                    সাইন ইন
-                                </Link>
+                    ) : (
+                        <div className="flex items-center gap-2 sm:gap-3">
+                            <Link
+                                href="/signin"
+                                className={`${pathname === "/signin"
+                                    ? "bg-[#05893E] btn text-white"
+                                    : "btn"
+                                    } !min-h-0 !h-auto px-3 py-2 text-xs sm:px-4 sm:text-sm md:text-base`}
+                            >
+                                সাইন ইন
+                            </Link>
 
-                                <Link
-                                    href="/signup"
-                                    className={`${pathname === "/signup" || pathname === "/"
-                                        ? "bg-[#05893E] btn text-white"
-                                        : "btn"
-                                        }`}
-                                >
-                                    সাইন আপ
-                                </Link>
-                            </div>
-                    }
-
-
+                            <Link
+                                href="/signup"
+                                className={`${pathname === "/signup" || pathname === "/"
+                                    ? "bg-[#05893E] btn text-white"
+                                    : "btn"
+                                    } !min-h-0 !h-auto px-3 py-2 text-xs sm:px-4 sm:text-sm md:text-base`}
+                            >
+                                সাইন আপ
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
-            <div >
-                <NavLink></NavLink>
+
+            <div>
+                <NavLink />
             </div>
         </div>
     );

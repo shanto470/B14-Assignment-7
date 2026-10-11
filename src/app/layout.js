@@ -2,7 +2,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Footer from "@/components/Footer";
-import Marquee from "@/components/Marquee";
 import MarquePage from "@/components/Marquee";
 import { Toaster } from "react-hot-toast";
 import SocialLoginToast from "@/components/SocialLoginToast";

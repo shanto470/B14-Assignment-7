@@ -1,69 +1,60 @@
-'use client'
+
+"use client";
 
 import DateDisplay from "@/components/DisplayDate";
 import MainPage from "@/components/Main";
 import Image from "next/image";
 import { Suspense } from "react";
-// import { useEffect, useState } from "react";
 
 export default function Home() {
-
-
   return (
-
     <section className="bg-[#eff4f0] pb-12">
-      <div >
+      <div>
+        <section className="container mx-auto mt-5 flex items-center font-sans sm:mt-6 md:mt-7">
+          <div className="flex w-full flex-col items-center justify-between gap-5 rounded-3xl border border-gray-100 bg-white/60 p-4 shadow-sm backdrop-blur-sm sm:gap-6 sm:p-5 md:mt-0 md:flex-row md:gap-6 md:p-6 lg:gap-10">
 
-        <section className="container m-auto flex items-center font-sans mt-7">
-
-          <div className="w-full bg-white/60 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm flex gap-10 flex-col md:flex-row items-center justify-between ">
-            <div className="w-full -mt-12">
-
-              <div className="inline-block bg-[#e2f0e6] text-[#1b7a43] text-sm font-medium px-4 py-1.5 rounded-full">
+            <div className="mt-0 w-full md:-mt-12">
+              <div className="inline-block rounded-full bg-[#e2f0e6] px-3 py-1.5 text-xs font-medium text-[#1b7a43] sm:px-4 sm:text-sm">
                 <Suspense fallback={null}>
-                  <DateDisplay></DateDisplay>
+                  <DateDisplay />
                 </Suspense>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111827] tracking-tight leading-tight mt-3">
+              <h1 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight text-[#111827] sm:text-3xl md:text-4xl lg:text-5xl">
                 আজকের বাজারের দাম এক নজরে
               </h1>
 
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-3">
+              <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
                 চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-
-                <br />
+                <br className="hidden lg:block" />
                 সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।
               </p>
 
-              <div className="pt-2">
-                <button className="bg-[#008744] hover:bg-[#007239] text-white font-medium px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-sm sm:text-base">
+              <div className="pt-3 sm:pt-2">
+                <button className="rounded-lg bg-[#008744] px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#007239] hover:shadow-lg sm:px-6 sm:text-base">
                   সব পণ্য দেখুন
                 </button>
               </div>
-
             </div>
 
-
-            <div className="-mt-12 relative flex items-center justify-center w-full max-w-70 sm:max-w-[320px] aspect-square shrink-0">
-
+            <div className="relative flex aspect-square w-full max-w-48 shrink-0 items-center justify-center sm:max-w-60 md:-mt-12 md:max-w-56 lg:max-w-70">
               <Image
                 src="/bazar-hero.png"
-                alt="banner"
+                alt="বাজারের পণ্য"
                 width={500}
                 height={500}
+                className="h-auto w-full object-contain"
+                priority
               />
-
             </div>
 
           </div>
-
         </section>
-
       </div>
+
       <div>
-        <MainPage></MainPage>
+        <MainPage />
       </div>
-
     </section>
   );
 }
