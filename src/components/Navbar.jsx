@@ -62,7 +62,7 @@ const Navbar = () => {
                                 />
 
                                 <span className="max-w-[100px] truncate text-sm font-semibold text-gray-800 sm:max-w-[150px] sm:text-base md:max-w-none">
-                                    {user.name}
+                                    {user.name} ▾
                                 </span>
                             </button>
 
@@ -78,6 +78,7 @@ const Navbar = () => {
                                         <span className="max-w-full break-all text-sm text-gray-500">
                                             {user.email}
                                         </span>
+
                                     </div>
                                 </li>
 
